@@ -1,7 +1,6 @@
 package com.smit.springSecurity.controller;
 
 import com.smit.springSecurity.dto.UserDTO;
-import com.smit.springSecurity.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
