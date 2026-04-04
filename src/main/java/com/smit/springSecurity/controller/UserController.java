@@ -1,19 +1,19 @@
 package com.smit.springSecurity.controller;
 
 import com.smit.springSecurity.dto.UserDTO;
+import com.smit.springSecurity.service.impl.UserServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
+@RequiredArgsConstructor
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @PostMapping
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
@@ -30,9 +30,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        userService.deleteUser(id);
-        return "User deleted successfully";
-    }
+//    @DeleteMapping("/{id}")
+//    public String deleteUser(@PathVariable Long id) {
+//        userService.deleteUser(id);
+//        return "User deleted successfully";
+//    }
 }
