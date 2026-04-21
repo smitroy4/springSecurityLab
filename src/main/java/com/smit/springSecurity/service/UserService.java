@@ -9,18 +9,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    public void registerUser(String username, String rawPassword, String role) {
-        Users user = new Users();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(rawPassword));
-        user.setRole(role);
-        userRepository.save(user);
-    }
 
 }

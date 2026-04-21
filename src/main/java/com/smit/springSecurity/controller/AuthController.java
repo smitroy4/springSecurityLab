@@ -9,22 +9,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@RequestMapping("/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private UserService userService;
-
-    @PostMapping("/auth/register")
-    public String register(@RequestBody Users user) {
-        userService.registerUser(user.getUsername(), user.getPassword(), user.getRole());
-        return "User registered successfully!";
-    }
-
-    @GetMapping("/test")
-    public String test() {
-        return "Security is working!";
-    }
 
 }
