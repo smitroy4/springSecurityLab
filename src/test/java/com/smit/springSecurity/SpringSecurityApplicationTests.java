@@ -1,5 +1,7 @@
 package com.smit.springSecurity;
 
+import com.smit.springSecurity.entity.Users;
+import com.smit.springSecurity.service.JwtService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,15 +16,15 @@ class SpringSecurityApplicationTests {
 	@Test
 	void contextLoads() {
 
-        User user = new User(4L, "smit@email.com", "smit@1234");
+        Users user = new Users(4L, "smitroy", "smit@smail.com", "1234");
 
         String token = jwtService.generateToken(user);
 
-        System.out.println("Generated Token: " + token);
+        System.out.println(token);
 
-        Long idFromToken = jwtService.getUserIdFromToken(token);
+        Long id = jwtService.getUserIdFromToken(token);
 
-        System.out.println("User ID from Token: " + idFromToken);
+        System.out.println(id);
 
 	}
 
