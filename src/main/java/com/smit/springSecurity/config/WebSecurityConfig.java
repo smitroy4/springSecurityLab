@@ -19,47 +19,60 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
+//    @Bean
+//    SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//
+//        httpSecurity
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/auth/**").permitAll()
+//                        .requestMatchers("/laptops/**").hasAnyRole("ADMIN")
+//                        .anyRequest().authenticated()
+//                )
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .sessionManagement(httpSecuritySessionManagementConfigurer
+//                        -> httpSecuritySessionManagementConfigurer
+//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+////                .formLogin(Customizer.withDefaults());
+//
+//        return httpSecurity.build();
+//
+//    }
 
-        httpSecurity
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable()) // for testing (important)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/laptops").permitAll()
-                        .requestMatchers("/laptops/**").hasAnyRole("ADMIN")
+                        .requestMatchers("/auth/**").permitAll()  // allow signup/login
                         .anyRequest().authenticated()
                 )
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(httpSecuritySessionManagementConfigurer
-                        -> httpSecuritySessionManagementConfigurer
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .formLogin(Customizer.withDefaults());
-
-        return httpSecurity.build();
-
+                .build();
     }
 
 
+//    @Bean
+//    UserDetailsService InMemoryuserDetailsService(){
+//        UserDetails normalUser = User
+//                .withUsername("smit")
+//                .password(passwordEncoder().encode("Smit@1234"))
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails adminUser = User
+//                .withUsername("admin")
+//                .password(passwordEncoder().encode("Admin@1234"))
+//                .roles("ADMIN")
+//                .build();
+//
+//        return new InMemoryUserDetailsManager(normalUser, adminUser);
+
+//    }
+
     @Bean
-    UserDetailsService InMemoryuserDetailsService(){
-        UserDetails normalUser = User
-                .withUsername("smit")
-                .password(passwordEncoder().encode("Smit@1234"))
-                .roles("USER")
-                .build();
-
-        UserDetails adminUser = User
-                .withUsername("admin")
-                .password(passwordEncoder().encode("Admin@1234"))
-                .roles("ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(normalUser, adminUser);
-
-    }
-
-    @Bean
-    PasswordEncoder passwordEncoder(){
+    PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
 }
+
+
