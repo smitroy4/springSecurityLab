@@ -8,7 +8,10 @@ import com.smit.springSecurity.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,7 +27,6 @@ public class UserService implements UserDetailsService {
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -43,12 +45,7 @@ public class UserService implements UserDetailsService {
         return modelMapper.map(savedUser, UserDto.class);
     }
 
-//    public String login(LoginDto loginDto) {
-//        Optional<Users> user = userRepository.findByEmail(signUpDto.getEmail());
-//        if(user.isPresent()){
-//            throw new BadCredentialsException("User with email already exists" + signUpDto.getEmail());
-//        }
-//
-//        return null;
-//    }
+
+
+
 }
